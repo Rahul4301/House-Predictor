@@ -1,5 +1,6 @@
 # House-Predictor
-House price predictor model. dataset from kaggle
+House price predictor model - linear regression
+- ML learning
 
 Requirements:
 pandas
