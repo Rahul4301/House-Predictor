@@ -6,16 +6,20 @@ from sklearn.metrics import mean_squared_error
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-house_data =  pd.read_csv("housepredictor.csv")
-house_data = house_data[["price","area","bedrooms","bathrooms","stories"]]
+# Load the data
+house_data = pd.read_csv("housepredictor.csv")
 
-# Setting a seed for reproducibility
-np.random.seed(42)
+# Remove duplicate entries
+house_data.drop_duplicates(inplace=True)
 
-# Generating 150 rows of data
-# num_rows = 1500
+# Drop rows with any empty entries
+house_data.dropna(inplace=True)
+
+# Select relevant columns
+house_data = house_data[["price", "area", "bedrooms", "bathrooms", "stories"]]
+
+# Extract columns
 area_sqft = house_data["area"]
-
 num_rooms = house_data["bedrooms"]
 bathrooms = house_data["bathrooms"]
 price = house_data["price"]
@@ -30,9 +34,8 @@ house_data = pd.DataFrame({
     'Price ($)': price
 })
 
-
 # Preparing the features (X) and target (y)
-X = house_data[['Area (sq.ft.)', 'Number of Rooms', 'Number of bathrooms','Number of stories' ]]
+X = house_data[['Area (sq.ft.)', 'Number of Rooms', 'Number of bathrooms', 'Number of stories']]
 y = house_data['Price ($)']
 
 # Splitting the dataset into training and test sets (80-20 split)
